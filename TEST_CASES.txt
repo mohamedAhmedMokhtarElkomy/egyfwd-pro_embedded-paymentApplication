@@ -1,0 +1,47 @@
+~/projects/egyfwd/embedded_pro/payment application$ gcc -o output/main main.c Card/card.c Terminal/terminal.c Server/server.c Application/app.c
+~/projects/egyfwd/embedded_pro/payment application$ ./output/main 
+	
+	Enter card holder name: mohamedAhmedMokhtarElk
+	Enter card expiry date: 12/23
+	Enter card PAN: 1234567890123456789
+	Enter transaction date: 22/08/2022
+	Enter transaction amount: 900.0
+	Enter max amount: 10000
+	PASSED
+	transaction is saved sucessfully
+
+~/projects/egyfwd/embedded_pro/payment application$ ./output/main 
+	Enter card holder name: mohamedAhmedMokhtarElk
+	Enter card expiry date: 12/23
+	Enter card PAN: 1234567890123456789
+	Enter transaction date: 22/08/2022
+	Enter transaction amount: 5000
+	Enter max amount: 4000
+	FAILED: EXCEED_MAX_AMOUNT
+
+~/projects/egyfwd/embedded_pro/payment application$ ./output/main 
+	Enter card holder name: mohamedAhmedMokhtarElk
+	Enter card expiry date: 12/23
+	Enter card PAN: 1234567890123456789
+	Enter transaction date: 22/08/2022
+	Enter transaction amount: 2000
+	Enter max amount: 4000
+	FAILED: LOW_BALANCE
+	FAILED: transaction failed
+
+~/projects/egyfwd/embedded_pro/payment application$ ./output/main 
+	Enter card holder name: mohamedAhmedMokhtarElk
+	Enter card expiry date: 12/21
+	Enter card PAN: 1234567890123456789
+	Enter transaction date: 22/08/2022
+	FAILED: EXPIRED_CARD
+
+~/projects/egyfwd/embedded_pro/payment application$ ./output/main 
+	Enter card holder name: mohamedAhmedMokhtarElk
+	Enter card expiry date: 12/23
+	Enter card PAN: 999999999999999999
+	Enter transaction date: 22/08/2022
+	Enter transaction amount: 900.0
+	Enter max amount: 10000
+	FAILED: Account is not valid
+	FAILED: transaction failed

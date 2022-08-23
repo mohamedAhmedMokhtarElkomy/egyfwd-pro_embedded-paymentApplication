@@ -65,7 +65,7 @@ EN_terminalError_t isBelowMaxAmount(ST_terminalData_t *termData)
 
 EN_terminalError_t setMaxAmount(ST_terminalData_t *termData)
 {
-    printf("Enter max amount");
+    printf("Enter max amount: ");
     scanf("%f", &termData->maxTransAmount);
 
     if(termData->maxTransAmount <= 0)

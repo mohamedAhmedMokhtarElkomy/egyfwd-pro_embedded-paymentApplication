@@ -18,28 +18,20 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData)
         sprintf(accounts[i].primaryAccountNumber, "%ld", (1234567890123456789+i));
 
         fprintf(acc, "%f\t", accounts[i].balance);
-        fprintf(acc, "%s\n", accounts[i].primaryAccountNumber);
-
-        fprintf(acc, "\n");
-        
+        fprintf(acc, "%s\n", accounts[i].primaryAccountNumber);   
     }
       
     fclose (acc);
-    
-    // ST_cardData_t cardHolderData;
-    // ST_terminalData_t terminalData;
-    // EN_transState_t transState;
-    // uint32_t transactionSequenceNumber;
 
     if(isValidAccount(&transData->cardHolderData) != 0)
     {
-        printf("Account is not valid\n");
+        printf("FAILED: Account is not valid\n");
         return DECLINED_STOLEN_CARD;
     }
 
     if(isAmountAvailable(&transData->terminalData) != 0)
     {
-        printf("the required amount is not available\n");
+        printf("FAILED: LOW_BALANCE\n");
         return DECLINED_INSUFFECIENT_FUND;
     }
     return SERVER_OK;

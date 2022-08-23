@@ -2,6 +2,8 @@
 #define TERMINAL_H
 
 #include "../Card/card.h"
+#include<stdio.h>
+#include<string.h>
 
 typedef unsigned char uint8_t;
 
