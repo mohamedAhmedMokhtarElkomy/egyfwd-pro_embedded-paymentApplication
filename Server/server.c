@@ -2,46 +2,68 @@
 #include <string.h>
 #include <stdio.h>
 
-int currentIndex = 0;
 ST_accountsDB_t accounts[255];
 ST_transaction_t transactions[255] = { 0 };
 
-EN_transState_t recieveTransactionData(ST_transaction_t *transData)
+void dummyValues(){
+    for (int i = 0; i < 10; i++)
+    {
+        accounts[i].balance = 1000 + (i * 100);
+        sprintf(accounts[i].primaryAccountNumber, "%ld", (1234567890123456789+i));
+    }
+}
+
+void dummyFile()
 {
     FILE *acc;
     acc = fopen ("output/accounts.txt", "w");
     //FILL dumb data for accounts
     
-    for (int i = 0; i < 255; i++)
+    for (int i = 0; i < 10; i++)
     {
-        accounts[i].balance = 1000 + (i * 100);
-        sprintf(accounts[i].primaryAccountNumber, "%ld", (1234567890123456789+i));
-
         fprintf(acc, "%f\t", accounts[i].balance);
         fprintf(acc, "%s\n", accounts[i].primaryAccountNumber);   
     }
       
     fclose (acc);
+}
 
-    if(isValidAccount(&transData->cardHolderData) != 0)
+void updateBalance(ST_accountsDB_t *accountRefrence, int amount){ 
+    accountRefrence->balance -= amount;
+}
+
+EN_transState_t recieveTransactionData(ST_transaction_t *transData)
+{
+    dummyValues();
+    // dummyFile();
+
+    ST_accountsDB_t *accountRefrence;
+
+    if(isValidAccount(&transData->cardHolderData, &accountRefrence) != 0)
     {
         printf("FAILED: Account is not valid\n");
         return DECLINED_STOLEN_CARD;
     }
+  
 
-    if(isAmountAvailable(&transData->terminalData) != 0)
+    if(isAmountAvailable(&transData->terminalData, accountRefrence) != 0)
     {
         printf("FAILED: LOW_BALANCE\n");
         return DECLINED_INSUFFECIENT_FUND;
     }
+    // else
+    //     updateBalance(accountRefrence, transData->terminalData.transAmount);
+    
+    
     return SERVER_OK;
 }
 
-EN_serverError_t isValidAccount(ST_cardData_t *cardData)
+EN_serverError_t isValidAccount(ST_cardData_t *cardData, ST_accountsDB_t **accountRefrence)
 {
     for (int i = 0; i < 255; i++){
         if(strcmp(accounts[i].primaryAccountNumber, cardData->primaryAccountNumber) == 0){
-            currentIndex = i;
+
+            *accountRefrence = &accounts[i];
             return SERVER_OK;
         }
     }
@@ -49,17 +71,23 @@ EN_serverError_t isValidAccount(ST_cardData_t *cardData)
     
 }
 
-EN_serverError_t isAmountAvailable(ST_terminalData_t *termData)
+EN_serverError_t isAmountAvailable(ST_terminalData_t *termData, ST_accountsDB_t *accountRefrence)
 {
-    // printf("\n%f\n", accounts[currentIndex].balance);    
-    if (accounts[currentIndex].balance < termData->transAmount)
+
+    if (accountRefrence->balance < termData->transAmount)
         return LOW_BALANCE;
+
+    accountRefrence->balance -= termData->transAmount;
+    
     return SERVER_OK;
+
     
 }
 
 EN_serverError_t saveTransaction(ST_transaction_t *transData)
-{
+{    
+    dummyFile();
+
     FILE *transfile;
      
     transfile = fopen ("output/transactions.txt", "a");
