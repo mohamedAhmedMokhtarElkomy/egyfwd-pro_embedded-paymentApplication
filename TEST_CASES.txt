@@ -1,5 +1,5 @@
-~/projects/egyfwd/embedded_pro/payment application$ gcc -o output/main main.c Card/card.c Terminal/terminal.c Server/server.c Application/app.c
-~/projects/egyfwd/embedded_pro/payment application$ ./output/main 
+payment application$ gcc -o output/main main.c Card/card.c Terminal/terminal.c Server/server.c Application/app.c
+payment application$ ./output/main 
 	
 	Enter card holder name: mohamedAhmedMokhtarElk
 	Enter card expiry date: 12/23
@@ -47,11 +47,4 @@
 	FAILED: transaction failed
 	
 	
-	
-	
-mohamedAhmedMokhtarElk
-12/23
-1234567890123456791
-22/08/2022
-900.0
-10000
+
