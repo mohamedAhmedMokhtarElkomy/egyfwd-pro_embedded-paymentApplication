@@ -4,6 +4,7 @@
 
 ST_accountsDB_t accounts[255];
 ST_transaction_t transactions[255] = { 0 };
+uint8_t blockedAccounts[255][25];
 
 void dummyValues(){
     for (int i = 0; i < 10; i++)
@@ -32,17 +33,35 @@ void updateBalance(ST_accountsDB_t *accountRefrence, int amount){
     accountRefrence->balance -= amount;
 }
 
+EN_transState_t checkBlockList(ST_cardData_t cardData)
+{
+    printf("REACHED\n");
+    for (int i = 0; i < 255; i++)
+    {
+        if(strcmp(blockedAccounts[i], cardData.primaryAccountNumber) == 0)
+            return DECLINED_STOLEN_CARD;
+    }
+    
+    return SERVER_OK;
+}
+
 EN_transState_t recieveTransactionData(ST_transaction_t *transData)
 {
+    strcpy(blockedAccounts[0], "1234567890123456790");
     dummyValues();
     // dummyFile();
 
     ST_accountsDB_t *accountRefrence;
 
+    if(checkBlockList != 0)
+    {
+        printf("FAILED: DECLINED_STOLEN_CARD");
+        return DECLINED_STOLEN_CARD;
+    }
     if(isValidAccount(&transData->cardHolderData, &accountRefrence) != 0)
     {
         printf("FAILED: Account is not valid\n");
-        return DECLINED_STOLEN_CARD;
+        return ACCOUNT_NOT_FOUND;
     }
   
 
