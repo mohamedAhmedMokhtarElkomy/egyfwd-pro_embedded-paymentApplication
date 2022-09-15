@@ -42,7 +42,7 @@ EN_transState_t checkBlockList(ST_cardData_t cardData)
             return DECLINED_STOLEN_CARD;
     }
     
-    return SERVER_OK;
+    return APPROVED;
 }
 
 EN_transState_t recieveTransactionData(ST_transaction_t *transData)
@@ -53,7 +53,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData)
 
     ST_accountsDB_t *accountRefrence;
 
-    if(checkBlockList != 0)
+    if(checkBlockList(transData->cardHolderData) != APPROVED)
     {
         printf("FAILED: DECLINED_STOLEN_CARD");
         return DECLINED_STOLEN_CARD;
