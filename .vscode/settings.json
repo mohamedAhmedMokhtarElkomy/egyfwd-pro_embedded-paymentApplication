@@ -3,6 +3,7 @@
         "app.h": "c",
         "card.h": "c",
         "terminal.h": "c",
-        "server.h": "c"
+        "server.h": "c",
+        "stdio.h": "c"
     }
 }

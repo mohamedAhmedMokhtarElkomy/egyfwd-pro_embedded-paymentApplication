@@ -1,8 +1,8 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include "../Card/card.h"
-#include "../Terminal/terminal.h"
+#include "card.h"
+#include "terminal.h"
 
 typedef unsigned int uint32_t;
 

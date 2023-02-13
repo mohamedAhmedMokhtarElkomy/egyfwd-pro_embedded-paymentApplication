@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/main.exe.dir/main.c.o CMakeFiles/main.exe.dir/Card/card.c.o CMakeFiles/main.exe.dir/Terminal/terminal.c.o CMakeFiles/main.exe.dir/Server/server.c.o CMakeFiles/main.exe.dir/Application/app.c.o -o main.exe 

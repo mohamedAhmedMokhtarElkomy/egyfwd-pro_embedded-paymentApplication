@@ -1,7 +1,7 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#include "../Card/card.h"
+#include "card.h"
 #include<stdio.h>
 #include<string.h>
 

@@ -2,7 +2,7 @@
 // #include <stdio.h>
 // #include "Terminal/terminal.h"
 // #include "Server/server.h"
-#include "Application/app.h"
+#include "app.h"
 
 int main()
 {

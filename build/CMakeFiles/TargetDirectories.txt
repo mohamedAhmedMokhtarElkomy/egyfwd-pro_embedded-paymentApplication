@@ -1,0 +1,3 @@
+/home/tata/projects/egyfwd-pro_embedded-paymentApplication/build/CMakeFiles/main.exe.dir
+/home/tata/projects/egyfwd-pro_embedded-paymentApplication/build/CMakeFiles/edit_cache.dir
+/home/tata/projects/egyfwd-pro_embedded-paymentApplication/build/CMakeFiles/rebuild_cache.dir

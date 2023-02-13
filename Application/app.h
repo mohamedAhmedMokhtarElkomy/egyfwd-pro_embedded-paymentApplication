@@ -1,9 +1,9 @@
 #ifndef APP_H
 #define APP_H
-#include "../Card/card.h"
+#include "card.h"
 #include <stdio.h>
-#include "../Terminal/terminal.h"
-#include "../Server/server.h"
+#include "terminal.h"
+#include "server.h"
 
 void appStart(void);
 
